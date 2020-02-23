@@ -1,0 +1,8 @@
+SPEEDTEST:
+
+sudo apt-get install python3-pip
+sudo pip3 install speedtest-cli
+
+usage:
+- speedtest-cli
+- speedtest-cli --simple // Just the download, upload and ping
