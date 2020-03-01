@@ -6,6 +6,7 @@
 #include "include/checkBot.h"
 #include "include/getBot.h"
 #include "include/reportBot.h"
+#include "include/onCommand.h"
 
 int main() {
     int piHour = getHour();
@@ -13,38 +14,24 @@ int main() {
     std::string adminId = getAdminId();
     TgBot::Bot bot(getBotToken("doc/botToken.txt"));
     bot.getApi().sendMessage(std::stoi(adminId), "The server is online");
+
     bot.getEvents().onCommand("start", [&bot](TgBot::Message::Ptr message) {
-        bot.getApi().sendMessage(message->chat->id, std::to_string(message->chat->id));
+        onCommandStart(bot, message);
     });
     bot.getEvents().onCommand("temperature", [&bot](TgBot::Message::Ptr message) {
-        bot.getApi().sendMessage(message->chat->id, getPiTemperature());
+        onCommandTemperature(bot, message);
     });
     bot.getEvents().onCommand("ip", [&bot](TgBot::Message::Ptr message) {
-        bot.getApi().sendMessage(message->chat->id, getPiIp());
+        onCommandIp(bot, message);
     });
     bot.getEvents().onCommand("restart", [&bot,&adminId](TgBot::Message::Ptr message) {
-	if(checkAdmin(adminId, std::to_string(message->chat->id))){
-	    bot.getApi().sendMessage(message->chat->id, "The server will restart");
-	    std::string command = "sudo touch systemReboot.txt";
-            system(command.c_str());
-	}
-	else{
-	    bot.getApi().sendMessage(message->chat->id, "Only the administrator can execute this command");
-	}
+        onCommandRestart(bot, message, adminId);
     });
     bot.getEvents().onCommand("shutdown", [&bot,&adminId](TgBot::Message::Ptr message) {
-        if(checkAdmin(adminId, std::to_string(message->chat->id))){
-            bot.getApi().sendMessage(message->chat->id, "The server will shutdown");
-            std::string command = "sudo touch systemShutdown.txt";
-            system(command.c_str());
-        }
-        else{
-            bot.getApi().sendMessage(message->chat->id, "Only the administrator can execute this command");
-        }
+        onCommandShutdown(bot, message, adminId);
     });
     bot.getEvents().onCommand("speedtest", [&bot](TgBot::Message::Ptr message) {
-        bot.getApi().sendMessage(message->chat->id, "Testing network speed...");
-        bot.getApi().sendMessage(message->chat->id, piSpeedTest());
+        onCommandSpeedtest(bot, message);
     });
 
     bot.getEvents().onAnyMessage([&bot](TgBot::Message::Ptr message) {
