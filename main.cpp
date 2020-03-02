@@ -12,9 +12,20 @@
 int main() {
     int piHour = getHour();
     int runningTime = 0;
-    std::string adminId = getAdminId();
+    std::string adminId = getAdminId("data/adminId.txt");
     TgBot::Bot bot(getBotToken("data/botToken.txt"));
-    bot.getApi().sendMessage(std::stoi(adminId), "The server is online");
+
+    /*
+    Check if the admin id is registered, if not, send a message to the terminal.
+    Otherwise send a telegram message to the admin.
+    I'll move this piece of code to another file in a bit.
+    */
+    if(adminId == "false"){
+    	std::cout << "\nType /start to save the admin id\n";
+    }
+    else{
+    	bot.getApi().sendMessage(std::stoi(adminId), "The server is online");
+    }
 
     bot.getEvents().onCommand("start", [&bot](TgBot::Message::Ptr message) {
         onCommandStart(bot, message);

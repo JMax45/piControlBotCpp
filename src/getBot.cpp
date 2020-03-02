@@ -26,8 +26,8 @@ int getHour(){
     return calendar_time.tm_hour;
 }
 
-std::string getAdminId(){
-    std::ifstream file("doc/adminId.txt");
+std::string getAdminId(std::string fileLocation){
+    std::ifstream file(fileLocation);
     std::string adminId;
     file >> adminId;
     file.close();

@@ -3,3 +3,9 @@ void saveBotToken(std::string botToken){
 	file << botToken;
 	file.close();
 }
+
+void saveAdminId(std::string adminId){
+	std::ofstream file("data/adminId.txt");
+	file << adminId;
+	file.close();
+}

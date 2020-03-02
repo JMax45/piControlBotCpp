@@ -1,4 +1,5 @@
 void onCommandStart(TgBot::Bot bot, TgBot::Message::Ptr message){
+	saveAdminId(std::to_string(message->chat->id));
 	bot.getApi().sendMessage(message->chat->id, std::to_string(message->chat->id));
 }
 
