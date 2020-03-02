@@ -4,6 +4,7 @@
 #include <vector>
 #include "include/piInternal.h"
 #include "include/checkBot.h"
+#include "include/saveBot.h"
 #include "include/getBot.h"
 #include "include/reportBot.h"
 #include "include/onCommand.h"
@@ -12,7 +13,7 @@ int main() {
     int piHour = getHour();
     int runningTime = 0;
     std::string adminId = getAdminId();
-    TgBot::Bot bot(getBotToken("doc/botToken.txt"));
+    TgBot::Bot bot(getBotToken("data/botToken.txt"));
     bot.getApi().sendMessage(std::stoi(adminId), "The server is online");
 
     bot.getEvents().onCommand("start", [&bot](TgBot::Message::Ptr message) {
