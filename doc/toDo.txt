@@ -1,2 +1,0 @@
--[X] On launch message.
--[] Shutdown command.

@@ -1,3 +1,5 @@
+The list of bot commands, can be sent to @BotFather to be able to use them directly without writing the whole thing.
+
 temperature - Get CPU temperature
 ip - Get server IP
 restart - Reboot the server
