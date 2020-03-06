@@ -43,3 +43,24 @@ std::string piSpeedTest(){
 	system(command2.c_str());
 	return str;
 }
+
+std::vector<std::string> txtToVector(std::string filename){
+    std::vector<std::string> allStrings;
+    std::ifstream file(filename);
+    std::string str;
+    while(std::getline(file, str)){
+    allStrings.push_back(str);
+    }
+    file.close();
+    return allStrings;
+}
+
+std::string piUpgrade(){
+    system("sudo apt-get upgrade >> upgrade.txt");
+    system("tail -n 1 upgrade.txt >> upgradeStatus.txt");
+    system("sudo rm upgrade.txt");
+    std::vector<std::string> fileTail = txtToVector("upgradeStatus.txt");
+    system("rm upgradeStatus.txt");
+    // Returns first element because there is only one line in the file
+    return fileTail[0]; 
+}

@@ -5,3 +5,4 @@ ip - Get server IP
 restart - Reboot the server
 shutdown - Shutdown the server
 speedtest - Check internet speed
+upgrade - Update the system

@@ -36,6 +36,9 @@ int main() {
     bot.getEvents().onCommand("speedtest", [&bot](TgBot::Message::Ptr message) {
         onCommandSpeedtest(bot, message);
     });
+    bot.getEvents().onCommand("upgrade", [&bot](TgBot::Message::Ptr message) {
+        onCommandUpgrade(bot, message);
+    });
 
     bot.getEvents().onAnyMessage([&bot](TgBot::Message::Ptr message) {
         printf("User wrote %s\n", message->text.c_str());

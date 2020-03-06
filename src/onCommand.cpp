@@ -37,3 +37,9 @@ void onCommandSpeedtest(TgBot::Bot bot, TgBot::Message::Ptr message){
 	bot.getApi().sendMessage(message->chat->id, "Testing network speed...");
     bot.getApi().sendMessage(message->chat->id, piSpeedTest());
 }
+
+void onCommandUpgrade(TgBot::Bot bot, TgBot::Message::Ptr message){
+	bot.getApi().sendMessage(message->chat->id, "System upgrade...");
+	std::string systemUpgrade = piUpgrade();
+	bot.getApi().sendMessage(message->chat->id, systemUpgrade);
+}	
