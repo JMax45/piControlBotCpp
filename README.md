@@ -17,13 +17,25 @@ Use git to clone piControlBot:
 ```bash
 git clone https://github.com/JMax45/piControlBot
 ```
+tgbot-cpp is required, the installation guide is [here](https://github.com/reo7sp/tgbot-cpp#library-installation).
 
-## Usage
-
+## Configuration
 Use _./compile.sh_ to compile:
 ```bash
 ./compile.sh
 ```
+
+Launch the bot:
+```bash
+./piControlBot
+```
+
+The bot token will be requested, you can get one from [@BotFather](https://telegram.me/BotFather).
+
+If it is the first time that the bot is launched, you will have to write him /start on Telegram to register your id.
+
+## Usage
+
 Launch the bot:
 ```bash
 ./piControlBot
