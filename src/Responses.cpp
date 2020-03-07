@@ -1,47 +1,47 @@
 #include "../include/Responses.h"
 
-void Responses::Start(TgBot::Bot bot, TgBot::Message::Ptr message){
+void Responses::Start(TgBot::Bot tgbot, TgBot::Message::Ptr message){
 	saveAdminId(std::to_string(message->chat->id));
-	bot.getApi().sendMessage(message->chat->id, std::to_string(message->chat->id));
+	tgbot.getApi().sendMessage(message->chat->id, std::to_string(message->chat->id));
 }
 
-void Responses::Temperature(TgBot::Bot bot, TgBot::Message::Ptr message){
-	bot.getApi().sendMessage(message->chat->id, getPiTemperature());
+void Responses::Temperature(TgBot::Bot tgbot, TgBot::Message::Ptr message){
+	tgbot.getApi().sendMessage(message->chat->id, getPiTemperature());
 }
 
-void Responses::Ip(TgBot::Bot bot, TgBot::Message::Ptr message){
-	bot.getApi().sendMessage(message->chat->id, getPiIp());
+void Responses::Ip(TgBot::Bot tgbot, TgBot::Message::Ptr message){
+	tgbot.getApi().sendMessage(message->chat->id, getPiIp());
 }
 
-void Responses::Restart(TgBot::Bot bot, TgBot::Message::Ptr message, std::string adminId){
+void Responses::Restart(TgBot::Bot tgbot, TgBot::Message::Ptr message, std::string adminId){
 	if(checkAdmin(adminId, std::to_string(message->chat->id))){
-		bot.getApi().sendMessage(message->chat->id, "The server will restart");
+		tgbot.getApi().sendMessage(message->chat->id, "The server will restart");
 	    std::string command = "sudo touch systemReboot.txt";
         system(command.c_str());
 	}
 	else{
-	    bot.getApi().sendMessage(message->chat->id, "Only the administrator can execute this command");
+	    tgbot.getApi().sendMessage(message->chat->id, "Only the administrator can execute this command");
 	}
 }
 
-void Responses::Shutdown(TgBot::Bot bot, TgBot::Message::Ptr message, std::string adminId){
+void Responses::Shutdown(TgBot::Bot tgbot, TgBot::Message::Ptr message, std::string adminId){
 	if(checkAdmin(adminId, std::to_string(message->chat->id))){
-		bot.getApi().sendMessage(message->chat->id, "The server will shutdown");
+		tgbot.getApi().sendMessage(message->chat->id, "The server will shutdown");
         std::string command = "sudo touch systemShutdown.txt";
         system(command.c_str());
     }
     else{
-    	bot.getApi().sendMessage(message->chat->id, "Only the administrator can execute this command");
+    	tgbot.getApi().sendMessage(message->chat->id, "Only the administrator can execute this command");
     }
 }
 
-void Responses::Speedtest(TgBot::Bot bot, TgBot::Message::Ptr message){
-	bot.getApi().sendMessage(message->chat->id, "Testing network speed...");
-    bot.getApi().sendMessage(message->chat->id, piSpeedTest());
+void Responses::Speedtest(TgBot::Bot tgbot, TgBot::Message::Ptr message){
+	tgbot.getApi().sendMessage(message->chat->id, "Testing network speed...");
+    tgbot.getApi().sendMessage(message->chat->id, piSpeedTest());
 }
 
-void Responses::Upgrade(TgBot::Bot bot, TgBot::Message::Ptr message){
-	bot.getApi().sendMessage(message->chat->id, "System upgrade...");
+void Responses::Upgrade(TgBot::Bot tgbot, TgBot::Message::Ptr message){
+	tgbot.getApi().sendMessage(message->chat->id, "System upgrade...");
 	std::string systemUpgrade = piUpgrade();
-	bot.getApi().sendMessage(message->chat->id, systemUpgrade);
+	tgbot.getApi().sendMessage(message->chat->id, systemUpgrade);
 }	
