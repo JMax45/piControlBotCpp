@@ -1,17 +1,19 @@
-void onCommandStart(TgBot::Bot bot, TgBot::Message::Ptr message){
+#include "../include/Responses.h"
+
+void Responses::Start(TgBot::Bot bot, TgBot::Message::Ptr message){
 	saveAdminId(std::to_string(message->chat->id));
 	bot.getApi().sendMessage(message->chat->id, std::to_string(message->chat->id));
 }
 
-void onCommandTemperature(TgBot::Bot bot, TgBot::Message::Ptr message){
+void Responses::Temperature(TgBot::Bot bot, TgBot::Message::Ptr message){
 	bot.getApi().sendMessage(message->chat->id, getPiTemperature());
 }
 
-void onCommandIp(TgBot::Bot bot, TgBot::Message::Ptr message){
+void Responses::Ip(TgBot::Bot bot, TgBot::Message::Ptr message){
 	bot.getApi().sendMessage(message->chat->id, getPiIp());
 }
 
-void onCommandRestart(TgBot::Bot bot, TgBot::Message::Ptr message, std::string adminId){
+void Responses::Restart(TgBot::Bot bot, TgBot::Message::Ptr message, std::string adminId){
 	if(checkAdmin(adminId, std::to_string(message->chat->id))){
 		bot.getApi().sendMessage(message->chat->id, "The server will restart");
 	    std::string command = "sudo touch systemReboot.txt";
@@ -22,7 +24,7 @@ void onCommandRestart(TgBot::Bot bot, TgBot::Message::Ptr message, std::string a
 	}
 }
 
-void onCommandShutdown(TgBot::Bot bot, TgBot::Message::Ptr message, std::string adminId){
+void Responses::Shutdown(TgBot::Bot bot, TgBot::Message::Ptr message, std::string adminId){
 	if(checkAdmin(adminId, std::to_string(message->chat->id))){
 		bot.getApi().sendMessage(message->chat->id, "The server will shutdown");
         std::string command = "sudo touch systemShutdown.txt";
@@ -33,12 +35,12 @@ void onCommandShutdown(TgBot::Bot bot, TgBot::Message::Ptr message, std::string 
     }
 }
 
-void onCommandSpeedtest(TgBot::Bot bot, TgBot::Message::Ptr message){
+void Responses::Speedtest(TgBot::Bot bot, TgBot::Message::Ptr message){
 	bot.getApi().sendMessage(message->chat->id, "Testing network speed...");
     bot.getApi().sendMessage(message->chat->id, piSpeedTest());
 }
 
-void onCommandUpgrade(TgBot::Bot bot, TgBot::Message::Ptr message){
+void Responses::Upgrade(TgBot::Bot bot, TgBot::Message::Ptr message){
 	bot.getApi().sendMessage(message->chat->id, "System upgrade...");
 	std::string systemUpgrade = piUpgrade();
 	bot.getApi().sendMessage(message->chat->id, systemUpgrade);

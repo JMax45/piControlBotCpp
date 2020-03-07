@@ -7,37 +7,38 @@
 #include "include/saveBot.h"
 #include "include/getBot.h"
 #include "include/reportBot.h"
-#include "include/onCommand.h"
 #include "include/onLaunch.h"
+#include "src/Responses.cpp"
 
 int main() {
     int piHour = getHour();
     int runningTime = 0;
     std::string adminId = getAdminId("data/adminId.txt");
     TgBot::Bot bot(getBotToken("data/botToken.txt"));
+    Responses botResponses;
 
     onLaunchServerOnline(adminId, bot);
 
-    bot.getEvents().onCommand("start", [&bot](TgBot::Message::Ptr message) {
-        onCommandStart(bot, message);
+    bot.getEvents().onCommand("start", [&bot, &botResponses](TgBot::Message::Ptr message) {
+        botResponses.Start(bot, message);
     });
-    bot.getEvents().onCommand("temperature", [&bot](TgBot::Message::Ptr message) {
-        onCommandTemperature(bot, message);
+    bot.getEvents().onCommand("temperature", [&bot, &botResponses](TgBot::Message::Ptr message) {
+        botResponses.Temperature(bot, message);
     });
-    bot.getEvents().onCommand("ip", [&bot](TgBot::Message::Ptr message) {
-        onCommandIp(bot, message);
+    bot.getEvents().onCommand("ip", [&bot, &botResponses](TgBot::Message::Ptr message) {
+        botResponses.Ip(bot, message);
     });
-    bot.getEvents().onCommand("restart", [&bot,&adminId](TgBot::Message::Ptr message) {
-        onCommandRestart(bot, message, adminId);
+    bot.getEvents().onCommand("restart", [&bot,&adminId, &botResponses](TgBot::Message::Ptr message) {
+        botResponses.Restart(bot, message, adminId);
     });
-    bot.getEvents().onCommand("shutdown", [&bot,&adminId](TgBot::Message::Ptr message) {
-        onCommandShutdown(bot, message, adminId);
+    bot.getEvents().onCommand("shutdown", [&bot,&adminId, &botResponses](TgBot::Message::Ptr message) {
+        botResponses.Shutdown(bot, message, adminId);
     });
-    bot.getEvents().onCommand("speedtest", [&bot](TgBot::Message::Ptr message) {
-        onCommandSpeedtest(bot, message);
+    bot.getEvents().onCommand("speedtest", [&bot, &botResponses](TgBot::Message::Ptr message) {
+        botResponses.Speedtest(bot, message);
     });
-    bot.getEvents().onCommand("upgrade", [&bot](TgBot::Message::Ptr message) {
-        onCommandUpgrade(bot, message);
+    bot.getEvents().onCommand("upgrade", [&bot, &botResponses](TgBot::Message::Ptr message) {
+        botResponses.Upgrade(bot, message);
     });
 
     bot.getEvents().onAnyMessage([&bot](TgBot::Message::Ptr message) {
