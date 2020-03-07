@@ -41,7 +41,7 @@ Launch the bot:
 ./piControlBot
 ```
 
-You can also visit the [installation guide]("https://github.com/JMax45/piControlBot/blob/master/doc/INSTALLATION.md") to see the complete guide.
+You can also visit the [installation guide](https://github.com/JMax45/piControlBot/blob/master/doc/INSTALLATION.md) to see the complete guide.
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
