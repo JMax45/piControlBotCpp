@@ -1,8 +1,7 @@
 #include "../include/Responses.h"
 
 void Responses::Start(TgBot::Bot tgbot, TgBot::Message::Ptr message){
-	saveAdminId(std::to_string(message->chat->id));
-	tgbot.getApi().sendMessage(message->chat->id, std::to_string(message->chat->id));
+	saveAdminId(std::to_string(message->chat->id), tgbot, message);
 }
 
 void Responses::Temperature(TgBot::Bot tgbot, TgBot::Message::Ptr message){
