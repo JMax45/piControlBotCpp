@@ -65,6 +65,10 @@ int main() {
         }
     } catch (TgBot::TgException& e) {
         printf("error: %s\n", e.what());
+        std::string error = ("error: %s\n", e.what());
+        if(error=="Not Found"){
+            saveBotToken("false");
+        }
     }
     return 0;
 }
