@@ -4,6 +4,11 @@
 class Bot{
 public:
 	Responses responses;
+
+	TgBot::Bot create_tgbot();
+	TgBot::Bot tgbot = create_tgbot();
+
+	Bot();
 };
 
 #endif

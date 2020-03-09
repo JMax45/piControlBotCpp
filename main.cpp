@@ -12,52 +12,51 @@
 #include "src/Bot.cpp"
 
 int main() {
-    int piHour = getHour();
-    int runningTime = 0;
-    std::string adminId = getAdminId("data/adminId.txt");
-    TgBot::Bot tgbot(getBotToken("data/botToken.txt"));
-
     //This class contains all the things related to the bot
     Bot bot;
 
-    onLaunchServerOnline(adminId, tgbot);
+    int piHour = getHour();
+    int runningTime = 0;
+    std::string adminId = getAdminId("data/adminId.txt");
 
-    tgbot.getEvents().onCommand("start", [&tgbot, &bot](TgBot::Message::Ptr message) {
-        bot.responses.Start(tgbot, message);
+    onLaunchServerOnline(adminId, bot.tgbot);
+
+    bot.tgbot.getEvents().onCommand("start", [&bot](TgBot::Message::Ptr message) {
+        bot.responses.Start(bot.tgbot, message);
     });
-    tgbot.getEvents().onCommand("temperature", [&tgbot, &bot](TgBot::Message::Ptr message) {
-        bot.responses.Temperature(tgbot, message);
+    bot.tgbot.getEvents().onCommand("temperature", [&bot](TgBot::Message::Ptr message) {
+        bot.responses.Temperature(bot.tgbot, message);
     });
-    tgbot.getEvents().onCommand("ip", [&tgbot, &bot](TgBot::Message::Ptr message) {
-        bot.responses.Ip(tgbot, message);
+    bot.tgbot.getEvents().onCommand("ip", [&bot](TgBot::Message::Ptr message) {
+        bot.responses.Ip(bot.tgbot, message);
     });
-    tgbot.getEvents().onCommand("restart", [&tgbot,&adminId, &bot](TgBot::Message::Ptr message) {
-        bot.responses.Restart(tgbot, message, adminId);
+    bot.tgbot.getEvents().onCommand("restart", [&adminId, &bot](TgBot::Message::Ptr message) {
+        bot.responses.Restart(bot.tgbot, message, adminId);
     });
-    tgbot.getEvents().onCommand("shutdown", [&tgbot,&adminId, &bot](TgBot::Message::Ptr message) {
-        bot.responses.Shutdown(tgbot, message, adminId);
+    bot.tgbot.getEvents().onCommand("shutdown", [&adminId, &bot](TgBot::Message::Ptr message) {
+        bot.responses.Shutdown(bot.tgbot, message, adminId);
     });
-    tgbot.getEvents().onCommand("speedtest", [&tgbot, &bot](TgBot::Message::Ptr message) {
-        bot.responses.Speedtest(tgbot, message);
+    bot.tgbot.getEvents().onCommand("speedtest", [&bot](TgBot::Message::Ptr message) {
+        bot.responses.Speedtest(bot.tgbot, message);
     });
-    tgbot.getEvents().onCommand("upgrade", [&tgbot, &bot](TgBot::Message::Ptr message) {
-        bot.responses.Upgrade(tgbot, message);
+    bot.tgbot.getEvents().onCommand("upgrade", [&bot](TgBot::Message::Ptr message) {
+        bot.responses.Upgrade(bot.tgbot, message);
     });
 
-    tgbot.getEvents().onAnyMessage([&tgbot](TgBot::Message::Ptr message) {
+    bot.tgbot.getEvents().onAnyMessage([&bot](TgBot::Message::Ptr message) {
         printf("User wrote %s\n", message->text.c_str());
         if (StringTools::startsWith(message->text, "/start")) {
             return;
         }
     });
     try {
-        printf("Bot username: %s\n", tgbot.getApi().getMe()->username.c_str());
-        TgBot::TgLongPoll longPoll(tgbot);
+        printf("Bot username: %s\n", bot.tgbot.getApi().getMe()->username.c_str());
+        TgBot::TgLongPoll longPoll(bot.tgbot);
         while (true) {
             if(getHour()!=piHour){
 		piHour = getHour();
 				runningTime++;
-                tgbot.getApi().sendMessage(std::stoi(adminId), hourReport(runningTime));
+                bot.tgbot.getApi().sendMessage(std::stoi(adminId), hourReport(runningTime));
 	    }
 	    checkReboot();
 	    checkShutdown();
