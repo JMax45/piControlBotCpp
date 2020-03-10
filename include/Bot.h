@@ -5,6 +5,8 @@ class Bot{
 public:
 	Responses responses;
 
+	std::string adminId;
+
 	TgBot::Bot create_tgbot();
 	TgBot::Bot tgbot = create_tgbot();
 

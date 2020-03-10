@@ -1,7 +1,7 @@
 #include "../include/Bot.h"
 
 Bot::Bot(){
-
+	adminId = getAdminId("data/adminId.txt");
 }	
 
 TgBot::Bot Bot::create_tgbot(){
