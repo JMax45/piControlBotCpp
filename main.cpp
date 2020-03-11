@@ -69,9 +69,9 @@ int main() {
     } catch (TgBot::TgException& e) {
         printf("error: %s\n", e.what());
         std::string error = ("error: %s\n", e.what());
+        bot.log(error);
         if(error=="Not Found"){
             saveBotToken("false");
-            bot.log("error: Api key not found.");
         }
     }
     return 0;
