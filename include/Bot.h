@@ -10,6 +10,8 @@ public:
 	TgBot::Bot create_tgbot();
 	TgBot::Bot tgbot = create_tgbot();
 
+	void log(std::string message);
+	
 	Bot();
 };
 

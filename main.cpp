@@ -2,6 +2,7 @@
 #include <tgbot/tgbot.h>
 #include <iostream>
 #include <vector>
+#include "lib/date/include/date/date.h"
 #include "include/piInternal.h"
 #include "include/checkBot.h"
 #include "include/saveBot.h"
@@ -14,6 +15,7 @@
 int main() {
     //This class contains all the things related to the bot
     Bot bot;
+    bot.log("Launching the bot.");
 
     int piHour = getHour();
     int runningTime = 0;
@@ -44,6 +46,8 @@ int main() {
 
     bot.tgbot.getEvents().onAnyMessage([&bot](TgBot::Message::Ptr message) {
         printf("User wrote %s\n", message->text.c_str());
+        std::string log = (message->text.c_str());
+        bot.log("User wrote: " + log + ".");
         if (StringTools::startsWith(message->text, "/start")) {
             return;
         }
@@ -67,6 +71,7 @@ int main() {
         std::string error = ("error: %s\n", e.what());
         if(error=="Not Found"){
             saveBotToken("false");
+            bot.log("error: Api key not found.");
         }
     }
     return 0;

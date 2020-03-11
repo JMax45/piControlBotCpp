@@ -33,3 +33,14 @@ std::string getAdminId(std::string fileLocation){
     file.close();
     return adminId;
 }
+
+std::string getTime(){
+    using namespace date;
+    using namespace std::chrono;
+
+    std::time_t t = std::chrono::system_clock::to_time_t(system_clock::now());
+    std::string ts = std::ctime(&t);
+    ts.resize(ts.size()-1);
+
+    return ts;
+}
