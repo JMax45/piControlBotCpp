@@ -2,6 +2,7 @@
 
 Bot::Bot(){
 	adminId = getAdminId("data/adminId.txt");
+	upTime = 0;
 }	
 
 TgBot::Bot Bot::create_tgbot(){

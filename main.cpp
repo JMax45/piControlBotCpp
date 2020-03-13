@@ -18,7 +18,6 @@ int main() {
     bot.log("Launching the bot.");
 
     int piHour = getHour();
-    int runningTime = 0;
 
     onLaunchServerOnline(bot.adminId, bot.tgbot);
 
@@ -58,8 +57,8 @@ int main() {
         while (true) {
             if(getHour()!=piHour){
 		piHour = getHour();
-				runningTime++;
-                bot.tgbot.getApi().sendMessage(std::stoi(bot.adminId), hourReport(runningTime));
+				bot.upTime++;
+                bot.tgbot.getApi().sendMessage(std::stoi(bot.adminId), hourReport(bot.upTime));
 	    }
 	    checkReboot();
 	    checkShutdown();

@@ -6,7 +6,8 @@ public:
 	Responses responses;
 
 	std::string adminId;
-
+	int upTime;
+	
 	TgBot::Bot create_tgbot();
 	TgBot::Bot tgbot = create_tgbot();
 
