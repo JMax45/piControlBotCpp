@@ -1,6 +1,6 @@
 class Transfer{
 public:
-	void convert(std::string filename, std::string output);
+	void convert(std::string filename);
 
 	std::string upload();
 

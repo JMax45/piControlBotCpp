@@ -4,8 +4,8 @@ Transfer::Transfer(){
 
 }
 
-void Transfer::convert(std::string filename, std::string output){
-	std::string command = ("cupsfilter " + filename + " > " + output);
+void Transfer::convert(std::string filename){
+	std::string command = ("cd data && libreoffice --convert-to 'pdf' " + filename);
 	system(command.c_str());
 }
 

@@ -49,7 +49,7 @@ void Responses::Logs(TgBot::Bot tgbot, TgBot::Message::Ptr message){
 	Transfer transfer;
 	
 	tgbot.getApi().sendMessage(message->chat->id, "Converting logs file...");
-	transfer.convert("data/logs.txt", "data/logs.pdf");
+	transfer.convert("logs.txt");
 	tgbot.getApi().sendMessage(message->chat->id, "File converted");
 
 	tgbot.getApi().sendMessage(message->chat->id, "Uploading logs file...");
