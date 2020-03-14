@@ -17,7 +17,7 @@ sudo apt-get install python3-pip & sudo pip3 install speedtest-cli
 Then you need to install tgbot-cpp.
 
 ```bash
-sudo apt-get install g++ make binutils cmake libssl-dev libboost-system-dev zlib1g-dev
+sudo apt-get install g++ make binutils cmake libssl-dev libboost-system-dev zlib1g-dev enscript
 ```
 
 ```bash

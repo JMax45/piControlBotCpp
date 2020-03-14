@@ -44,3 +44,18 @@ void Responses::Upgrade(TgBot::Bot tgbot, TgBot::Message::Ptr message){
 	std::string systemUpgrade = piUpgrade();
 	tgbot.getApi().sendMessage(message->chat->id, systemUpgrade);
 }	
+
+void Responses::Logs(TgBot::Bot tgbot, TgBot::Message::Ptr message){
+	Transfer transfer;
+	
+	tgbot.getApi().sendMessage(message->chat->id, "Converting logs file...");
+	transfer.convert("data/logs.txt", "data/logs.pdf");
+	tgbot.getApi().sendMessage(message->chat->id, "File converted");
+
+	tgbot.getApi().sendMessage(message->chat->id, "Uploading logs file...");
+	std::string fileUrl = transfer.upload();
+	tgbot.getApi().sendMessage(message->chat->id, "File uploaded");
+
+	const boost::variant< TgBot::InputFile::Ptr, std::string > filename = fileUrl;
+	tgbot.getApi().sendDocument(message->chat->id, filename);
+}

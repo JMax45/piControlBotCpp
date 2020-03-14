@@ -2,7 +2,9 @@
 #include <tgbot/tgbot.h>
 #include <iostream>
 #include <vector>
+#include "lib/file/src/txtToVector.cpp"
 #include "lib/date/include/date/date.h"
+#include "lib/transfer/src/Transfer.cpp"
 #include "include/piInternal.h"
 #include "include/checkBot.h"
 #include "include/saveBot.h"
@@ -35,6 +37,9 @@ int main() {
     });
     bot.tgbot.getEvents().onCommand("upgrade", [&bot](TgBot::Message::Ptr message) {
         bot.responses.Upgrade(bot.tgbot, message);
+    });
+    bot.tgbot.getEvents().onCommand("logs", [&bot](TgBot::Message::Ptr message) {
+        bot.responses.Logs(bot.tgbot, message);
     });
 
     bot.tgbot.getEvents().onAnyMessage([&bot](TgBot::Message::Ptr message) {

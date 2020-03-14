@@ -16,6 +16,8 @@ public:
 	void Speedtest(TgBot::Bot tgbot, TgBot::Message::Ptr message);
 
 	void Upgrade(TgBot::Bot tgbot, TgBot::Message::Ptr message);
+
+	void Logs(TgBot::Bot tgbot, TgBot::Message::Ptr message);
 };
 
 #endif
