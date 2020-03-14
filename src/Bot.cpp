@@ -3,6 +3,7 @@
 Bot::Bot(){
 	adminId = getAdminId("data/adminId.txt");
 	upTime = 0;
+	time = getHour();
 	serverOnline();
 }	
 

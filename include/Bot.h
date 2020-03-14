@@ -7,6 +7,7 @@ public:
 
 	std::string adminId;
 	int upTime;
+	int time;
 	
 	TgBot::Bot create_tgbot();
 	TgBot::Bot tgbot = create_tgbot();

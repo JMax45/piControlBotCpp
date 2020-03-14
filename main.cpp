@@ -16,8 +16,6 @@ int main() {
     Bot bot;
     bot.log("Launching the bot.");
 
-    int piHour = getHour();
-
     bot.tgbot.getEvents().onCommand("start", [&bot](TgBot::Message::Ptr message) {
         bot.responses.Start(bot.tgbot, message);
     });
@@ -52,8 +50,8 @@ int main() {
         printf("Bot username: %s\n", bot.tgbot.getApi().getMe()->username.c_str());
         TgBot::TgLongPoll longPoll(bot.tgbot);
         while (true) {
-            if(getHour()!=piHour){
-		piHour = getHour();
+            if(getHour()!=bot.time){
+		bot.time = getHour();
 				bot.upTime++;
                 bot.tgbot.getApi().sendMessage(std::stoi(bot.adminId), hourReport(bot.upTime));
 	    }
