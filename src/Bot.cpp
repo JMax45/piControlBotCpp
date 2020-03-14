@@ -5,6 +5,7 @@ Bot::Bot(){
 	upTime = 0;
 	time = getHour();
 	serverOnline();
+	log("Launching the bot.");
 }	
 
 TgBot::Bot Bot::create_tgbot(){

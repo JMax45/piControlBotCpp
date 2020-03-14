@@ -14,7 +14,6 @@
 int main() {
     //This class contains all the things related to the bot
     Bot bot;
-    bot.log("Launching the bot.");
 
     bot.tgbot.getEvents().onCommand("start", [&bot](TgBot::Message::Ptr message) {
         bot.responses.Start(bot.tgbot, message);
