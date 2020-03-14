@@ -5,7 +5,7 @@ Transfer::Transfer(){
 }
 
 void Transfer::convert(std::string filename, std::string output){
-	std::string command = ("enscript " + filename + " -o " + output);
+	std::string command = ("cupsfilter " + filename + " > " + output);
 	system(command.c_str());
 }
 
