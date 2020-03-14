@@ -8,7 +8,6 @@
 #include "include/saveBot.h"
 #include "include/getBot.h"
 #include "include/reportBot.h"
-#include "include/onLaunch.h"
 #include "src/Responses.cpp"
 #include "src/Bot.cpp"
 
@@ -18,8 +17,6 @@ int main() {
     bot.log("Launching the bot.");
 
     int piHour = getHour();
-
-    onLaunchServerOnline(bot.adminId, bot.tgbot);
 
     bot.tgbot.getEvents().onCommand("start", [&bot](TgBot::Message::Ptr message) {
         bot.responses.Start(bot.tgbot, message);

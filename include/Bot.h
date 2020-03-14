@@ -12,7 +12,8 @@ public:
 	TgBot::Bot tgbot = create_tgbot();
 
 	void log(std::string message);
-	
+	void serverOnline();
+
 	Bot();
 };
 
