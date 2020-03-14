@@ -21,7 +21,7 @@ int main() {
         bot.responses.Start(bot.tgbot, message);
     });
     bot.tgbot.getEvents().onCommand("temperature", [&bot](TgBot::Message::Ptr message) {
-        //bot.responses.Temperature(bot.tgbot, message);
+        bot.responses.Temperature(bot.tgbot, message);
     });
     bot.tgbot.getEvents().onCommand("ip", [&bot](TgBot::Message::Ptr message) {
         bot.responses.Ip(bot.tgbot, message);
