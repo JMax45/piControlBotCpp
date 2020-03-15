@@ -59,8 +59,7 @@ int main() {
 				bot.upTime++;
                 bot.tgbot.getApi().sendMessage(std::stoi(bot.adminId), hourReport(bot.upTime));
 	    }
-	    checkReboot();
-	    checkShutdown();
+            bot.check();
             printf("Long poll started\n");
             longPoll.start();
         }

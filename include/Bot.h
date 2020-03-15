@@ -14,6 +14,7 @@ public:
 
 	void log(std::string message);
 	void serverOnline();
+	void check();
 
 	Bot();
 };

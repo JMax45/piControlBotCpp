@@ -31,3 +31,8 @@ void Bot::serverOnline(){
     	tgbot.getApi().sendMessage(std::stoi(adminId), "The server is online");
     }
 }
+
+void Bot::check(){
+	checkReboot();
+	checkShutdown();
+}
