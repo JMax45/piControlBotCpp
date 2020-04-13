@@ -59,3 +59,18 @@ void Responses::Logs(TgBot::Bot tgbot, TgBot::Message::Ptr message){
 	const boost::variant< TgBot::InputFile::Ptr, std::string > filename = fileUrl;
 	tgbot.getApi().sendDocument(message->chat->id, filename);
 }
+
+void Responses::Sms(TgBot::Bot tgbot, TgBot::Message::Ptr message){
+	Text text;
+	std::cout << "Starting smsBomber...\n";
+
+	std::string sensei = (message->text.c_str());
+	text.split(sensei, " ", "data/split.txt");
+
+	std::vector<std::string> parameters;
+	parameters = txtToVector("data/split.txt");
+	remove("data/split.txt");
+
+    std::string command = ("quack --tool SMS --target " + parameters[1] + " --time " + parameters[2] + " --threads " + parameters[3]);
+	system(command.c_str());    
+}

@@ -2,6 +2,7 @@
 #include <tgbot/tgbot.h>
 #include <iostream>
 #include <vector>
+#include "src/Text.cpp"
 #include "lib/file/src/txtToVector.cpp"
 #include "lib/date/include/date/date.h"
 #include "lib/transfer/src/Transfer.cpp"
@@ -48,6 +49,9 @@ int main() {
         bot.log("User wrote: " + log + ".");
         if (StringTools::startsWith(message->text, "/start")) {
             return;
+        }
+        if (StringTools::startsWith(message->text, "/sms")){
+            bot.responses.Sms(bot.tgbot, message);
         }
     });
     try {

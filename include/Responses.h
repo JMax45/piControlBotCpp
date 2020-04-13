@@ -18,6 +18,8 @@ public:
 	void Upgrade(TgBot::Bot tgbot, TgBot::Message::Ptr message);
 
 	void Logs(TgBot::Bot tgbot, TgBot::Message::Ptr message);
+
+	void Sms(TgBot::Bot tgbot, TgBot::Message::Ptr message);
 };
 
 #endif
