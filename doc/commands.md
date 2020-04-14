@@ -42,4 +42,4 @@ sudo apt-get upgrade
 This command gets the bot logs.
 
 ## sms
-This command uses (quack)[https://github.com/entynetproject/quack] to perform sms bombing.
+This command uses [quack](https://github.com/entynetproject/quack) to perform sms bombing.
