@@ -28,6 +28,17 @@ make -j4
 sudo make install
 ```
 
+## quack
+
+In order to use the sms bomber function you need to install [quack](https://github.com/entynetproject/quack).
+
+```bash
+git clone https://github.com/entynetproject/quack
+cd quack
+chmod +x install.sh
+./install.sh
+```
+
 ## piControlBot
 
 After doing all of this we can install the bot itself.
