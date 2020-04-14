@@ -37,3 +37,9 @@ This command updates the system using:
 ```bash
 sudo apt-get upgrade
 ```
+
+## logs
+This command gets the bot logs.
+
+## sms
+This command uses (quack)[https://github.com/entynetproject/quack] to perform sms bombing.
