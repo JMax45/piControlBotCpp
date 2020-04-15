@@ -13,3 +13,13 @@ void Text::split(std::string s, std::string delimiter, std::string filename){
     file << s.substr(start, end);
     file.close();
 }
+
+bool Text::checkSame(std::vector<std::string> list, std::string str){
+    bool value = false;
+    for(int i=0; i<list.size(); i++){
+        if(list[i]==str){
+            value = true;
+        }
+    }
+    return value;
+}

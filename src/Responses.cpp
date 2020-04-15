@@ -71,10 +71,15 @@ void Responses::Sms(TgBot::Bot tgbot, TgBot::Message::Ptr message){
 	parameters = txtToVector("data/split.txt");
 	remove("data/split.txt");
 
+	std::vector<std::string> prohibitedNumbers;
+	prohibitedNumbers = txtToVector("data/prohibitedNumbers.txt");
 	// If parameters are more or less than necessary than don't execute the script but output a warning
 	if(parameters.size()>4||parameters.size()<4){
 		tgbot.getApi().sendMessage(message->chat->id, "Wrong number of parameters");
 		tgbot.getApi().sendMessage(message->chat->id, "You have to use the following ones: phone number, time, threads");
+	}
+	else if(text.checkSame(prohibitedNumbers, parameters[1])==true){
+		tgbot.getApi().sendMessage(message->chat->id, "Prohibited number");
 	}
 	else{
     	std::string command = ("quack --tool SMS --target " + parameters[1] + " --time " + parameters[2] + " --threads " + parameters[3] + " >> data/smsBomb.txt");
