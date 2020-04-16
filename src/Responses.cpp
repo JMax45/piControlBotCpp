@@ -73,8 +73,14 @@ void Responses::Sms(TgBot::Bot tgbot, TgBot::Message::Ptr message){
 
 	std::vector<std::string> prohibitedNumbers;
 	prohibitedNumbers = txtToVector("data/prohibitedNumbers.txt");
+
+	if(parameters.size() == 1){
+		tgbot.getApi().sendMessage(message->chat->id, "This function can perform an SMS bombing");
+		tgbot.getApi().sendMessage(message->chat->id, "You can use it by typing /sms + phone number + bombing time + threads");
+		tgbot.getApi().sendMessage(message->chat->id, "Example: /sms 15554443333 15 10");
+	}	
 	// If parameters are more or less than necessary than don't execute the script but output a warning
-	if(parameters.size()>4||parameters.size()<4){
+	else if(parameters.size()>4||parameters.size()<4){
 		tgbot.getApi().sendMessage(message->chat->id, "Wrong number of parameters");
 		tgbot.getApi().sendMessage(message->chat->id, "You have to use the following ones: phone number, time, threads");
 	}
