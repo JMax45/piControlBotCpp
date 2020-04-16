@@ -43,3 +43,9 @@ This command gets the bot logs.
 
 ## sms
 This command uses [quack](https://github.com/entynetproject/quack) to perform sms bombing.
+
+### _usage:_
+```bash
+/sms 15554443333 10 10
+```
+Phone number, time and threads.
