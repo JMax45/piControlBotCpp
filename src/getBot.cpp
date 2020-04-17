@@ -7,6 +7,7 @@ std::string getTokenFromUser(){
     std::cout << "\nWould you like the bot to start automatically?";
     std::cout << "\n<y/n>: ";
     std::string userChoice;
+    std::cin >> userChoice;
     if(userChoice=="y"){
         addCrontab();
         std::cout << "\nFrom now on the bot will start automatically\n";
