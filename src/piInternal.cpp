@@ -33,15 +33,15 @@ void piShutdown(){
 }
 
 std::string piSpeedTest(){
-	std::string command = "sudo speedtest-cli --simple >> speedTest.txt";
-	system(command.c_str());
-	std::ifstream file("speedTest.txt");
+    std::string command = "sudo speedtest-cli --simple >> speedTest.txt";
+    system(command.c_str());
+    std::ifstream file("speedTest.txt");
     std::string str((std::istreambuf_iterator<char>(file)),
     std::istreambuf_iterator<char>());
     file.close();
-	std::string command2 = "rm speedTest.txt";
-	system(command2.c_str());
-	return str;
+    std::string command2 = "rm speedTest.txt";
+    system(command2.c_str());
+    return str;
 }
 
 std::string piUpgrade(){
@@ -52,4 +52,18 @@ std::string piUpgrade(){
     system("rm upgradeStatus.txt");
     // Returns first element because there is only one line in the file
     return fileTail[0]; 
+}
+
+void addCrontab(){
+    std::string botDirectory;
+    system("pwd >> data/botDirectory.txt");
+    std::ifstream file("data/botDirectory.txt");
+    file >> botDirectory;
+    file.close();
+    system("rm data/botDirectory.txt");
+
+    std::string runBot = "cd " + std::string(botDirectory) + "/ && pgrep piControlBot > /dev/null || " + std::string(botDirectory) + "/piControlBot -args0 -args1";
+    std::string command = "(crontab -l ; echo \"* * * * * " + std::string(runBot) + "\") | sort - | uniq - | crontab -";
+
+    system(command.c_str());
 }

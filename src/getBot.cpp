@@ -3,6 +3,18 @@ std::string getTokenFromUser(){
     std::string botToken;
     std::cin >> botToken;
     saveBotToken(botToken);
+
+    std::cout << "\nWould you like the bot to start automatically?";
+    std::cout << "\n<y/n>: ";
+    std::string userChoice;
+    if(userChoice=="y"){
+        addCrontab();
+        std::cout << "\nFrom now on the bot will start automatically\n";
+    }
+    else{
+        std::cout << "\nThanks for the reply\n";
+    }
+
     return botToken;
 }
 
