@@ -4,7 +4,9 @@ piControlBot is a bot that helps you check the status of your raspberry pi throu
 
 This allows you to stay in touch with your raspberry even from your phone.
 
-The bot contains a list of commands that will be expanded, for example you can get the IP of your raspberry or check the CPU temperature.
+The bot contains a list of commands that will be expanded, for example you can get the IP of your raspberry, check the CPU temperature or perform an sms bombing.
+
+You can check all commands [here](https://github.com/JMax45/piControlBot/blob/master/doc/commands.md).
 
 In addition, every hour the bot sends a summary of the raspberry status to the admin.
 
