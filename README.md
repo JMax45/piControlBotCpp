@@ -1,6 +1,6 @@
 # piControlBot
 
-**This version is no longer maintained, you can visit the maintained one (here)[https://github.com/JMax45/piControlBot/]
+**This version is no longer maintained, you can visit the maintained one (here)[https://github.com/JMax45/piControlBot/]**
 
 piControlBot is a bot that helps you check the status of your raspberry pi through [Telegram](https://telegram.org/).
 
